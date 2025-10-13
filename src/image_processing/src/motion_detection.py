@@ -2,32 +2,37 @@ import cv2
 import os
 import numpy as np
 
-video_folder_path = '/workspaces/base_ros2/src/image_processing/split/'
+video_folder_path = '/workspaces/AIFR_VSCode_WS_Copy/src/image_processing/split'
 
-background = cv2.imread('/workspaces/base_ros2/src/image_processing/split/output_0001.png')
+background = cv2.imread('/workspaces/AIFR_VSCode_WS_Copy/src/image_processing/split/out1.png')
 bkg_gray = cv2.cvtColor(background, cv2.COLOR_BGR2GRAY)
 
-white = np.full_like(bkg_gray, 0)
-# Create an image of size(background) with white pixels in it
+#for loop to iterate over the images
+    #read the image
+    #convert to gray scale
 
-for i in range(1, 87):
-    frame_name = f"output_{i:04d}.png"
+#create an image of size(background) with white pixels in it
+
+
+for i in range (1, 87):
+    frame_name = f"out{i:01d}.png"
     frame_path = os.path.join(video_folder_path, frame_name)
 
     current_frame = cv2.imread(frame_path)
     current_frame = cv2.cvtColor(current_frame, cv2.COLOR_BGR2GRAY)
 
     diff = current_frame - bkg_gray
-    white = white + diff
-    
-    clipped_diff = np.clip(diff, -20, 20)
+
+    clipped_diff = np.clip(diff, -15, 15)
+    # keep adding the diff to the white image
+    #keep saving each white image + diff -> outi.png
 
     bkg_gray = bkg_gray + clipped_diff
 
-cv2.imwrite('Background_Estimate.jpg', bkg_gray)
-cv2.imwrite('diff.jpg', white)
+#save bkg_image
+cv2.imwrite('/workspaces/AIFR_VSCode_WS_Copy/src/image_processing/test/background.png', bkg_gray)
 
-# save the image bkg_gray
-# Save the white image
+#save the white image
 
-# ffmpeg to concatenate and produce a video 
+#ffmpeg to concat the images to a video
+

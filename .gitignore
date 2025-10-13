@@ -2,3 +2,4 @@
 build/
 install/
 log/
+src/image_processing/split/
