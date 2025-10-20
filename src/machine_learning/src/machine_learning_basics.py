@@ -10,10 +10,10 @@ X = x.reshape(-1, 1)
 y = y.reshape(-1, 1)
 
 # w = (X^T X)^{-1} X^T y
-XT = X.T
-XTX = XT @ X
-XTX_inv = np.linalg.inv(XTX)
-XTy = XT @ y
+XT = X.T #transpose
+XTX = XT @ X #dot product
+XTX_inv = np.linalg.inv(XTX) #inverse dot product
+XTy = XT @ y 
 w = XTX_inv @ XTy
 
 w_optimal = w[0][0]  # Slope only
